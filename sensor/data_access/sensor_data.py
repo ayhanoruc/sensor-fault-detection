@@ -1,7 +1,4 @@
 # pylint: disable=all
-
-
-
 import sys
 from typing import Optional
 

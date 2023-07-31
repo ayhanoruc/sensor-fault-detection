@@ -1,9 +1,9 @@
 # pylint: disable=all
-from sensor.entity import config_entity
+from sensor.entity.config_entity import DataIngestionConfig, TrainingPipelineConfig
 from sensor.exceptions import SensorException
 import os , sys
 from sensor.entity.artifact_entity import DataIngestionArtifact
-from sensor import logger
+from sensor.logger import logging
 from sensor.components.data_ingestion import DataIngestion
 
 
@@ -11,21 +11,20 @@ from sensor.components.data_ingestion import DataIngestion
 class TrainPipeline:
 
     def __init__(self):
-        self.training_pipeline_config = config_entity.TrainingPipelineConfig()
-        
+        self.training_pipeline_config = TrainingPipelineConfig()
 
-    
+
     def start_data_ingestion(self)->DataIngestionArtifact:
-        try: 
-            self.data_ingestion_config = config_entity.DataIngestionConfig(training_pipeline_config=self.training_pipeline_config)
-            logger.logging.info("Starting Data Ingestion")
-            data_ingestion= DataIngestion(data_ingestion_config=self.data_ingestion_config)
-            data_ingestion_artifact= data_ingestion.initiate_data_ingestion()
-            
-            logger.logging.info(f"Data Ingestion Completed and artifact:{data_ingestion_artifact}")
+        try:
+            self.data_ingestion_config = DataIngestionConfig(training_pipeline_config=self.training_pipeline_config)
+            logging.info("Starting data ingestion")
+            data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
+            data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
+            logging.info(f"Data ingestion completed and artifact: {data_ingestion_artifact}")
             return data_ingestion_artifact
-        except Exception as e:
-            raise SensorException(e,sys)
+        except  Exception as e:
+            raise  SensorException(e,sys)
+
         
     def start_data_validation(self):
         try: 

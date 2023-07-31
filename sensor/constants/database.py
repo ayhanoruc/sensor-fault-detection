@@ -1,2 +1,2 @@
-DATABASE_NAME= "ayhanoruc"
+DATABASE_NAME= "local"
 COLLECTION_NAME = "kafka-sensor-data"
