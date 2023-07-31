@@ -14,4 +14,4 @@ This is a supervised machine learning  classification problem focusing on detect
 
 -################3
 
-## mongo db url: mongodb+srv://avnish:XglZZ9OkjjUw74pZ@ineuron-ai-projects.7eh1w4s.mongodb.net/admin?authSource=admin&replicaSet=atlas-okvkrd-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true
+## mongo db url: mongodb+srv://ayhanoruc:Ayhan.orc54@cluster0.iwqnmeh.mongodb.net/?retryWrites=true&w=majority
