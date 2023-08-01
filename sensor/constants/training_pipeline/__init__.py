@@ -24,7 +24,7 @@ SCHEMA_DROP_COLS = "drop_columns"
 # Data Ingestion related constants
 #-----------------------------------
 
-DATA_INGESTION_COLLECTION_NAME:str = "sensor"
+DATA_INGESTION_COLLECTION_NAME:str = "kafka-sensor-data"
 DATA_INGESTION_DIR_NAME:str = "data_ingestion"
 DATA_INGESTION_FEATURE_STORE_DIR:str = "feature_store"
 DATA_INGESTION_INGESTED_DIR:str = "ingested"
