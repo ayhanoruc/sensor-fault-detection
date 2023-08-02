@@ -105,7 +105,3 @@ class ModelTrainer:
 
 
 
-
-class Person:
-    pass 
-
