@@ -14,4 +14,3 @@ This is a supervised machine learning  classification problem focusing on detect
 
 -################3
 
-## mongo db url: mongodb+srv://ayhanoruc:Ayhan.orc54@cluster0.iwqnmeh.mongodb.net/?retryWrites=true&w=majority
