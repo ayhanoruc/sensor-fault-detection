@@ -55,3 +55,13 @@ DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR:str = "transformed_object" # preproce
 
 
 
+
+"""
+Model Training related constants
+
+"""
+MODEL_TRAINER_DIR_NAME :str = "model-trainer"
+MODEL_TRAINER_TRAINED_MODEL_DIR:str = "trained_model"
+MODEL_TRAINER_TRAINED_MODEL_NAME:str = "model.pkl"
+MODEL_TRAINER_EXPECTED_SCORE :float = 0.6
+MODEL_TRAINER_OVER_UNDER_THRESHOLD :float = 0.05

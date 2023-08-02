@@ -5,4 +5,5 @@ pyYAML
 scikit-learn
 scipy
 imblearn
+xgboost
 -e .
