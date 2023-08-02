@@ -3,7 +3,8 @@ from sensor.constants.database import COLLECTION_NAME, DATABASE_NAME
 import pandas as pd
 import sys,os
 
-# Replace 'your_mongodb_uri' with your actual MongoDB connection URI
+# Replace 'your_mongodb_uri' with your actual MongoDB connection URL
+
 URL= "mongodb://localhost:27017"
 client = pymongo.MongoClient(URL)
 

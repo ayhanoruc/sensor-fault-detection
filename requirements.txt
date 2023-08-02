@@ -1,4 +1,8 @@
 pymongo[srv] == 4.4.1
 certifi==2023.7.22
 from_root
+pyYAML
+scikit-learn
+scipy
+imblearn
 -e .

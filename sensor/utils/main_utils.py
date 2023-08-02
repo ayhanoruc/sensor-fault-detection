@@ -1,4 +1,3 @@
-# pylint: disable=all
 import yaml
 from sensor.exceptions import SensorException
 from sensor.logger import logging

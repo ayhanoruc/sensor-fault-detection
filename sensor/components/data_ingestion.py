@@ -58,6 +58,7 @@ class DataIngestion:
             )
 
             dir_path = os.path.dirname(self.data_ingestion_config.training_file_path)
+            
 
             os.makedirs(dir_path, exist_ok=True)
 
