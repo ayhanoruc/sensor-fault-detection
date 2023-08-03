@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 from sensor.ml.model.model_estimator import SensorModel
 from sensor.utils.main_utils import save_object, load_object
 import os,sys
-
+import numpy as np
 class ModelTrainer:
 
     def __init__(self,model_trainer_config:ModelTrainerConfig,
@@ -18,13 +18,19 @@ class ModelTrainer:
         
         try:
             
-            self.model_trainer_config = model_trainer_config 
+            self.model_trainer_config = model_trainer_config
             self.data_transformation_artifact = data_transformation_artifact
+        
+        
+        except Exception as e:
+            raise SensorException(e,sys)
 
 
-    def perform_hyper_tuning(self,):
+    def perform_hyper_tuning(self):
+
         try:
             pass 
+
         except Exception as e:
             raise SensorException(e,sys)
 
@@ -32,7 +38,8 @@ class ModelTrainer:
     def train_model(self,x_train,y_train)->XGBClassifier:
         try:
             xgb_clf = XGBClassifier()
-            xgb_clf.fit(x_train,y_train) 
+            print(f"y_train: unique values: {np.unique(y_train,return_counts=False)}")
+            xgb_clf.fit(x_train,y_train)
 
             return xgb_clf
 
@@ -55,12 +62,11 @@ class ModelTrainer:
 
 
             #split the data as input and target features
-
-            x_train, y_train, x_test, y_test =(
-                train_arr[: , :-1],
-                train_arr[: , -1],
-                test_arr[: , :-1],
-                test_arr[: ,  -1],
+            x_train, y_train, x_test, y_test = (
+                train_arr[:, :-1],
+                train_arr[:, -1],
+                test_arr[:, :-1],
+                test_arr[:, -1],
             )
 
             # then train the model:
@@ -77,7 +83,7 @@ class ModelTrainer:
 
 
             #check OVERFITTING and UNDERFITTING
-            dif = abs(classificatation_train_metric.f1_score-classificatation_test_metric.f1_score)
+            diff = abs(classificatation_train_metric.f1_score-classificatation_test_metric.f1_score)
 
             if diff >self.model_trainer_config.over_under_threshold:
                 logging.info("OVERFITTING OR UNDERFITTING may occur, try to do more Experimentation")

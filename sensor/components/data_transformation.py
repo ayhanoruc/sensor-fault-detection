@@ -65,15 +65,17 @@ class DataTransformation:
 
             #training dataframe
             input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN], axis=1)
-            target_feature_train_df = train_df[TARGET_COLUMN].round()
-            logging.info(f"target_feature_train_df : # of na: { target_feature_train_df.isna().sum()}, dtypes: {target_feature_train_df.dtypes} ")
-            target_feature_train_df = target_feature_train_df.replace( TargetValueMapping().to_dict())
-
+            #print(train_df.head(20))
+            target_feature_train_df = pd.DataFrame(np.where(train_df[TARGET_COLUMN]<0,0,1))
+            #logging.info(f"target_feature_train_df : value_counts: { target_feature_train_df.value_counts()} ")
+            #target_feature_train_df = target_feature_train_df.replace( TargetValueMapping().to_dict())
+            #print(target_feature_train_df.head(10))
             #testing dataframe
             input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
-            target_feature_test_df = test_df[TARGET_COLUMN].round()
-            logging.info(f"target_feature_test_df : # of na: { target_feature_test_df.isna().sum()}, dtypes: {target_feature_test_df.dtypes} ")
-            target_feature_test_df = target_feature_test_df.replace(TargetValueMapping().to_dict())
+            target_feature_test_df = pd.DataFrame(np.where(test_df[TARGET_COLUMN]<0,0,1))
+            
+            #logging.info(f"target_feature_test_df : value_counts: { target_feature_test_df.value_counts()} ")
+            #target_feature_test_df = target_feature_test_df.replace(TargetValueMapping().to_dict())
 
             preprocessor_object = preprocessor.fit(input_feature_train_df)
             transformed_input_train_feature = preprocessor_object.transform(input_feature_train_df)
