@@ -10,6 +10,7 @@ from sensor.ml.metric.classification_metric import get_classification_score
 from sensor.ml.model.model_estimator import SensorModel, ModelResolver
 
 import pandas as pd 
+import numpy as np
 
 from sensor.constants.training_pipeline import TARGET_COLUMN
 
@@ -40,10 +41,15 @@ class ModelEvaluation:
 
             #load valid train and test dataframes
             train_df = pd.read_csv(valid_train_file_path)
+            logging.info(f"train_df columns:{train_df.columns}")
             test_df = pd.read_csv(valid_test_file_path)
+            logging.info(f"test_df columns:{test_df.columns}")
 
             #concatanate the df's for evaluation
             df= pd.concat(objs=[train_df,test_df],axis=0)
+            y_true = pd.DataFrame(np.where(df[TARGET_COLUMN]<0,0,1))
+            df.drop(TARGET_COLUMN,axis=1,inplace=True)
+            logging.info(f"concat_df columns:{df.columns}")
 
             is_model_accepted=True 
             train_model_file_path = self.model_trainer_artifact.trained_model_file_path
@@ -68,14 +74,14 @@ class ModelEvaluation:
             latest_model = load_object(file_path=latest_model_path)
             train_model = load_object(file_path=train_model_file_path)
 
-            y_true = df[TARGET_COLUMN]
-            y_trained_pred= train_model.predict(df)
-            y_latest_pred = latest_model.predict(df)
+
+            y_trained_pred= train_model.predict(df.values)
+            y_latest_pred = latest_model.predict(df.values)
 
             trained_metric = get_classification_score(y_true,y_trained_pred)
             latest_metric = get_classification_score(y_true, y_latest_pred)
 
-            improved_accuracy = trained_metric - latest_metric
+            improved_accuracy = trained_metric.f1_score - latest_metric.f1_score
             if improved_accuracy> self.model_eval_config.change_threshold:
                 is_model_accepted=True 
 
@@ -93,7 +99,7 @@ class ModelEvaluation:
             logging.info(f"Model evaluation artifact : {model_evaluation_artifact}")
             
             #save the records
-            model_eval_report = model_evaluation_artifact.__dict__()
+            model_eval_report = model_evaluation_artifact.__dict__
             write_yaml_file(file_path=self.model_eval_config.report_file_path,content=model_eval_report)
 
             return model_evaluation_artifact

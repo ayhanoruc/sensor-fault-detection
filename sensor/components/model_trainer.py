@@ -11,6 +11,7 @@ from sensor.ml.model.model_estimator import SensorModel
 from sensor.utils.main_utils import save_object, load_object
 import os,sys
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 class ModelTrainer:
 
     def __init__(self,model_trainer_config:ModelTrainerConfig,
@@ -35,15 +36,17 @@ class ModelTrainer:
             raise SensorException(e,sys)
 
 
-    def train_model(self,x_train,y_train)->XGBClassifier:
+    def train_model(self,x_train,y_train)->LogisticRegression():
         try:
-            xgb_clf = XGBClassifier()
-            print(f"y_train: unique values: {np.unique(y_train,return_counts=False)}")
-            xgb_clf.fit(x_train,y_train)
-
-            return xgb_clf
 
 
+            l_r= LogisticRegression()
+            l_r.fit(x_train,y_train)
+            
+            #xgb_clf = XGBClassifier()
+            #xgb_clf.fit(x_train,y_train)
+            return l_r
+            
         except Exception as e:
             raise SensorException(e,sys)
 

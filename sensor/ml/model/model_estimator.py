@@ -82,7 +82,7 @@ class ModelResolver:
             if os.listdir(self.model_dir) ==0: # if there is no model saved
                 return False  
             
-            latest_model_path = self.get_best_model()
+            latest_model_path = self.get_best_model_path()
             if not os.path.exists(latest_model_path):
                 return False
             
