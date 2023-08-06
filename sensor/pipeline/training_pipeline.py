@@ -10,6 +10,7 @@ from sensor.components.data_transformation import DataTransformation
 from sensor.components.model_trainer import ModelTrainer
 from sensor.components.model_evalutaion import ModelEvaluation
 from sensor.components.model_pusher import ModelPusher 
+from sensor.constants.s3_bucket import TRAINING_BUCKET_NAME ,  PREDICTION_BUCKET_NAME
 
 class TrainPipeline:
     is_pipeline_running = False
@@ -91,6 +92,15 @@ class TrainPipeline:
             raise SensorException(e,sys)
         
 
+
+    def sync_artifact_dir_to_s3(self):
+        try: 
+            aws_bucket_url = f"s3//{TRAINING_BUCKET_NAME}/artifact/{self.training_pipeline_config.timestamp}"
+            self.s3
+        except Exception as e:
+            raise SensorException(e,sys)
+
+
     def run_pipeline(self):
         try: 
             TrainPipeline.is_pipeline_running = True
@@ -104,6 +114,7 @@ class TrainPipeline:
     
             model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
             TrainPipeline.is_pipeline_running = False 
+            self.sy
         except Exception as e:
             TrainPipeline.is_pipeline_running = False 
             raise SensorException(e,sys)
