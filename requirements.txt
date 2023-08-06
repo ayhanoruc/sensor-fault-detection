@@ -6,4 +6,5 @@ scikit-learn
 scipy
 imblearn
 xgboost
+fastapi
 -e .

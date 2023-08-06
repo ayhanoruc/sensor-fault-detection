@@ -12,7 +12,7 @@ from sensor.components.model_evalutaion import ModelEvaluation
 from sensor.components.model_pusher import ModelPusher 
 
 class TrainPipeline:
-
+    is_pipeline_running = False
     def __init__(self):
         self.training_pipeline_config = TrainingPipelineConfig()
 
@@ -93,6 +93,7 @@ class TrainPipeline:
 
     def run_pipeline(self):
         try: 
+            TrainPipeline.is_pipeline_running = True
             data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
             data_validation_artifact=self.start_data_validaton(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(data_validation_artifact=data_validation_artifact)
@@ -102,8 +103,9 @@ class TrainPipeline:
                 raise Exception("Current Trained Model is not improved")
     
             model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
-        
+            TrainPipeline.is_pipeline_running = False 
         except Exception as e:
+            TrainPipeline.is_pipeline_running = False 
             raise SensorException(e,sys)
         
 
