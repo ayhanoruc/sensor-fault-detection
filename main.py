@@ -45,7 +45,6 @@ def set_env_variable(env_file_path):
 
 
 app = FastAPI()
-
 origins = ["*"]
 
 app.add_middleware(
@@ -55,6 +54,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/", tags=["authentication"])
 async def index():
@@ -72,34 +72,27 @@ async def train_route():
     except Exception as e:
         return Response(f"Error Occurred! {e}")
 
-
 @app.get("/predict")
-async def predict_route ():
-
+async def predict_route():
     try:
-        #get data from user csv
-        # convert csv file to dataframe
-        df= None
+        #get data from user csv file
+        #conver csv file to dataframe
 
-        # obtain train df
-        # upload train df 
-        # calculate the data drift, if drift is signifant then trigger an email to datascientist team 
-
-
+        df=None
         model_resolver = ModelResolver(model_dir=SAVED_MODEL_DIR)
         if not model_resolver.is_model_exists():
-            return Response("Model is not avaliable")
+            return Response("Model is not available")
+        
         best_model_path = model_resolver.get_best_model_path()
-        model = load_object(file_path= best_model_path)
+        model = load_object(file_path=best_model_path)
         y_pred = model.predict(df)
-        df["predicted_column"] = y_pred
-        df["predicted_column"].replace(TargetValueMapping().reverse_mapping(),inplace=True)
-        #decide how to return the output to user
-
-
+        df['predicted_column'] = y_pred
+        df['predicted_column'].replace(TargetValueMapping().reverse_mapping(),inplace=True)
+        
+        #decide how to return file to user.
+        
     except Exception as e:
-        raise Response(f"Error occured: {e}")
-
+        raise Response(f"Error Occured! {e}")
 
 def main():
     try:
@@ -112,5 +105,6 @@ def main():
 
 
 if __name__=="__main__":
-
+    #main()
+    set_env_variable(env_file_path)
     app_run(app, host=APP_HOST, port=APP_PORT)
