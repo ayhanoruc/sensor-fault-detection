@@ -52,3 +52,5 @@ Prior to running the project, make sure that you are having MongoDB in your loca
 `http://localhost:8080/predict`
 
 
+
+
