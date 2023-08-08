@@ -44,6 +44,8 @@ def set_env_variable(env_file_path):
         os.environ['MONGO_DB_URL']=env_config['MONGO_DB_URL']
 
 
+# 127.0.0.1
+
 app = FastAPI()
 origins = ["*"]
 
