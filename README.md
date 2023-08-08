@@ -7,7 +7,7 @@ This is a supervised machine learning  binary classification problem focusing on
 
 ## Solution Proposed
 . -> Train a successful classifier model to predict failures beforehand and maintain & scale & modulerize the project architecture.
-. -> Check EDA file located at notebook folder.
+Note: Check EDA file located at notebook folder.
 
 ## Tech Stack Used
 1. Python: core Python and OOP, and some common 3rd party libraries
