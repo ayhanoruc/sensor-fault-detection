@@ -7,7 +7,6 @@ from sensor.entity import config_entity
 from sensor.pipeline.training_pipeline import TrainPipeline
 
 import pandas as pd 
-
 from sensor.data_access.sensor_data import SensorData
 
 from sensor.exceptions import SensorException
