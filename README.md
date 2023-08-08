@@ -30,3 +30,6 @@ Prior to running the project, make sure that you are having MongoDB in your loca
 ### STEP1: CLONE THE REPO
 `https://github.com/ayhanoruc/sensor-fault-detection.git`
 
+### STEP2: Create a conda environment after opening the repository
+`conda create -n venv python=3.11 -y`
+
