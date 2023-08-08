@@ -33,3 +33,22 @@ Prior to running the project, make sure that you are having MongoDB in your loca
 ### STEP2: Create a conda environment after opening the repository
 `conda create -n venv python=3.11 -y`
 
+### STEP3: Install the requirements
+`pip install -r requirements.txt`
+
+### STEP4: Adjust your related env. variables:
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+  - AWS_DEFAULT_REGION
+  - MONGODB_URL
+
+### STEP5: Run the app
+`python main.py`
+
+### STEP6: Train the model through this route
+`http://localhost:8080/train`
+
+### STEP7: Predict with your dataset through this route
+`http://localhost:8080/predict`
+
+
