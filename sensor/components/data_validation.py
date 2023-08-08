@@ -95,8 +95,8 @@ class DataValidation:
             for col in base_df.columns:
                 d1 = base_df[col]
                 d2= current_df[col]
-                k_test = ks_2samp(d1,d2)
-                if k_test.pvalue <= threshold:
+                k_test = ks_2samp(d1,d2) # assess whether the data distributions have significantly changed beyond a specified threshold.
+                if k_test.pvalue <= threshold: #hypothesis accepted
                     is_found = False
                 else:
                     is_found = True

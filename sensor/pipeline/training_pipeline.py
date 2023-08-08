@@ -124,7 +124,7 @@ class TrainPipeline:
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
             model_eval_artifact = self.start_model_evaluation(data_validation_artifact,model_trainer_artifact)
             if not model_eval_artifact.is_model_accepted:
-                raise Exception("Current Trained Model is not improved")
+                raise Exception("Current Trained Model is not improved or couldn satisfied the min accuracy")
     
             model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
             TrainPipeline.is_pipeline_running = False 

@@ -98,8 +98,8 @@ class ModelTrainer:
             model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
             os.makedirs(model_dir_path,exist_ok=True)
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
-            sensor_model = SensorModel(preprocessor=preprocessor,model=model)
-            save_object(file_path=self.model_trainer_config.trained_model_file_path,obj=sensor_model)
+            sensor_model = SensorModel(preprocessor=preprocessor,model=model) # save for model versioning
+            save_object(file_path=self.model_trainer_config.trained_model_file_path,obj=sensor_model) 
 
             # model trainer artifact 
             model_trainer_artifact = ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,
