@@ -6,7 +6,8 @@ This is a supervised machine learning  binary classification problem focusing on
 -> We want to reduce the cost of maintanance checks and unnecessary repairs. So it is crucial to minimize the false predictions. 
 
 ## Solution Proposed
--> Train a successful classifier model to predict failures beforehand and maintain & scale & modulerize the project architecture. 
+- Train a successful classifier model to predict failures beforehand and maintain & scale & modulerize the project architecture.  
+- Note: Check EDA file located at notebook folder.
 
 ## Tech Stack Used
 1. Python: core Python and OOP, and some common 3rd party libraries
